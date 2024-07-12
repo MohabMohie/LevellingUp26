@@ -15,11 +15,11 @@ import org.testng.annotations.BeforeMethod;
 import java.time.Duration;
 
 public class TestCase {
-    WebDriver driver;
-    Wait<WebDriver> wait;
+    public WebDriver driver;
+    public Wait<WebDriver> wait;
 
     @BeforeMethod
-    void setUp(){
+    public void setUp(){
         // Open Mozilla Firefox
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
@@ -35,7 +35,7 @@ public class TestCase {
     }
 
     @AfterMethod
-    void tearDown(){
+    public void tearDown(){
         driver.quit();
     }
 }
