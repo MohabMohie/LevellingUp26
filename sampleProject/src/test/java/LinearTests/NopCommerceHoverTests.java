@@ -1,12 +1,10 @@
 package LinearTests;
 
+import Engine.ActionsBot;
 import PageObjectModelTests.TestCase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 public class NopCommerceHoverTests extends TestCase {
 
@@ -16,14 +14,7 @@ public class NopCommerceHoverTests extends TestCase {
         By computersMenuItemLink = By.xpath("//ul[contains(@class,'notmobile')]//a[text()='Computers ']");
         By desktopsSubMenuItemLink = By.xpath("//ul[contains(@class,'notmobile')]//a[text()='Desktops ']");
 
-        wait.until(d->{
-            new Actions(driver).moveToElement(driver.findElement(computersMenuItemLink))
-                            .pause(Duration.ofMillis(100))
-                            .moveToElement(driver.findElement(desktopsSubMenuItemLink))
-                            .click()
-                            .perform();
-            return true;
-        });
+        ActionsBot.hoverToSubMenuItem(driver, computersMenuItemLink, desktopsSubMenuItemLink);
 
         wait.until(d->{
             Assert.assertEquals(driver.getCurrentUrl(),"https://demo.nopcommerce.com/desktops");
