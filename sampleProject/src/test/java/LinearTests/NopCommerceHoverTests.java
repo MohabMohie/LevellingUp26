@@ -10,15 +10,18 @@ public class NopCommerceHoverTests extends TestCase {
 
     @Test
     public void testNopCommerceHover() {
-        driver.navigate().to("https://demo.nopcommerce.com/");
+//        nativeDriver.navigate().to("https://demo.nopcommerce.com/");
         By computersMenuItemLink = By.xpath("//ul[contains(@class,'notmobile')]//a[text()='Computers ']");
         By desktopsSubMenuItemLink = By.xpath("//ul[contains(@class,'notmobile')]//a[text()='Desktops ']");
 
-        ActionsBot.hoverToSubMenuItem(driver, computersMenuItemLink, desktopsSubMenuItemLink);
+//        ActionsBot.hoverToSubMenuItem(nativeDriver, computersMenuItemLink, desktopsSubMenuItemLink);
 
-        wait.until(d->{
-            Assert.assertEquals(driver.getCurrentUrl(),"https://demo.nopcommerce.com/desktops");
-            return true;
-        });
+//        wait.until(d->{
+//            Assert.assertEquals(nativeDriver.getCurrentUrl(),"https://demo.nopcommerce.com/desktops");
+//            return true;
+//        });
+        driver.browser().navigateToURL("https://demo.nopcommerce.com/")
+                .element().hover(computersMenuItemLink).click(desktopsSubMenuItemLink)
+                .browser().assertThat().url().isEqualTo("https://demo.nopcommerce.com/desktops");
     }
 }
