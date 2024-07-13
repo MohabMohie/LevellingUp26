@@ -1,7 +1,6 @@
 package PageObjectModelTests;
 
-import Pages.Google.Home;
-import Pages.Google.Results;
+import com.shaft.driver.SHAFT;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -15,17 +14,18 @@ import org.testng.annotations.BeforeMethod;
 import java.time.Duration;
 
 public class TestCase {
-    public WebDriver driver;
+    public SHAFT.GUI.WebDriver driver;
+    public WebDriver nativeDriver;
     public Wait<WebDriver> wait;
 
     @BeforeMethod
     public void setUp(){
         // Open Mozilla Firefox
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
+        driver = new SHAFT.GUI.WebDriver();
+        nativeDriver = driver.getDriver();
 
         // Setup fluent wait
-        wait = new FluentWait<>(driver)
+        wait = new FluentWait<>(nativeDriver)
                 .withTimeout(Duration.ofSeconds(30))
                 .pollingEvery(Duration.ofMillis(250))
                 .ignoring(NotFoundException.class)
